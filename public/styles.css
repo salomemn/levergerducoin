@@ -1,0 +1,164 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+ font-size: 16px;
+  line-height: 1.6;
+  margin-bottom:200px;
+  color: #333;
+}
+
+
+form {
+display: grid;
+grid-template-columns: 1fr;
+gap: 10px;
+}
+
+label {
+display: block;
+}
+
+input {
+width: calc(100% - 20px);
+padding: 8px;
+box-sizing: border-box;
+}
+/* Add this to your styles.css file */
+.low-stock {
+color: red;
+font-weight: bold;
+}
+
+/* styles.css */
+#tablesContainer {
+width: 75%;
+margin: 0 auto;
+display: flex;
+flex-direction: column;
+}
+
+.dashboard-table {
+width: 100%;
+border-collapse: collapse;
+}
+
+#toolbar {
+background-color: #063970; /* Set the background color */
+padding: 10px; /* Add some padding for spacing */
+text-align: center; /* Center the content within the toolbar */
+}
+
+/* Style for the toolbar buttons */
+#toolbar button {
+background-color: #063970; /* Set the button background color */
+border: none; /* Remove button borders */
+color: white; /* Set text color */
+padding: 10px 20px; /* Add padding for better appearance */
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+border-radius: 4px; /* Optional: Add some border-radius for rounded corners */
+}
+
+#toolbar button:hover {
+transition: 0.6s ease;
+background-color: #3b5088; /* Set the button background color on hover */
+}
+
+header {
+  background-color: #063970;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+margin-left: 20px;
+}
+
+h2 {
+font-size: 28px;
+font-weight: bold;
+font-family: 'Roboto', sans-serif;
+color: #1e2a4a;
+margin-bottom: 20px;
+}
+
+
+section {
+  margin: 20px;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+button {
+  grid-column: span 2;
+  padding: 10px;
+  background-color: #063970;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+footer {
+  background-color: #063970;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+button {
+  background-color: #063970;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #052654;
+}
+
+/* Style de base pour le tableau */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+/* Style pour les cellules d'en-tête (th) */
+th {
+  background-color: #063970;
+  color: #fff;
+  border: 1px solid #063970;
+  padding: 10px;
+}
+
+/* Style pour les cellules de données (td) */
+td {
+  border: 1px solid #063970;
+  padding: 10px;
+}
+
+/* Alternance des couleurs des lignes */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Hover sur les lignes */
+tr:hover {
+  background-color: #ddd;
+}

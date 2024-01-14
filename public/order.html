@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>Le Verger du Coin</h1>
+    </header>
+    <div id="toolbar">
+        <div id="toolbar">
+            <button onclick="home()">Accueil</button>
+            <button onclick="inventory()">Inventaire</button>
+            <button onclick="historiqueadmin()">Historique</button>
+            <button onclick="clients()">Clients fidèles</button>
+            <button onclick="logout()">Se déconnecter</button>
+        </div>
+    </div>
+    
+    <div id="toolbar">
+        <!-- ... (toolbar buttons) ... -->
+    </div>
+
+    <section id="reservationForm">
+        <h2>Passez votre commande</h2>
+        <form id="bookingForm">
+            <label for="product">Produit :</label>
+            <select id="product" name="product">
+                <option value="Pommes">Pommes</option>
+                <option value="Poires">Poires</option>
+                <option value="Tomates">Tomates</option>
+                <option value="Poivrons rouges">Poivrons rouges</option>
+                <option value="Bananes">Bananes</option>
+                <option value="Oignon">Oignon</option>
+                <option value="Cerises">Cerises</option>
+                <option value="Courgettes">Courgettes</option>
+                <option value="Carottes">Carottes</option>
+            </select>
+
+            <label for="quantity">Quantité :</label>
+            <input type="number" id="quantity" name="quantity" min="1" required>
+
+            <button type="button" onclick="submitOrderAdmin()">Réserver</button>
+
+        </form>
+
+    </section>
+
+    
+    <footer>
+        <p>&copy; 2024 Le Verger du Coin. Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

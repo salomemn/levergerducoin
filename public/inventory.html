@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/logo.ico" type="image/x-icon">
+    <title>Inventaire</title>
+</head>
+
+<body>
+    <header>
+        <h1>Le Verger du Coin</h1>
+    </header>
+
+    <!-- Toolbar at the top -->
+    <div id="toolbar">
+        <div id="toolbar">
+            <button onclick="home()">Accueil</button>
+            <button onclick="historiqueadmin()">Historique</button>
+            <button onclick="orderadmin()">Commander</button>
+            <button onclick="clients()">Clients fidèles</button>
+            <button onclick="logout()">Se déconnecter</button>
+        </div>
+    </div>
+
+    <section id="inventoryTable">
+        <h2>Inventaire</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nom du Produit</th>
+                    <th>Quantité en Stock</th>
+                    <th>Prix Unitaire</th>
+                    <th>Date de Réception</th>
+                    <th>Date de Vente</th>
+                    <th>Fournisseur</th>
+                    <th>Catégorie</th>
+                </tr>
+            </thead>
+            <tbody id="inventoryTableBody">
+                <!-- Inventory data will be dynamically added here -->
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Le Verger du Coin. Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Fetch inventory from the server and populate the table
+        fetch('http://localhost:3000/products')
+            .then(response => response.json())
+            .then(data => {
+                const inventoryTableBody = document.getElementById('inventoryTableBody');
+
+                // Clear existing rows
+                inventoryTableBody.innerHTML = '';
+
+                // Add new rows
+                data.products.forEach(product => {
+                    const row = inventoryTableBody.insertRow();
+                    row.insertCell().textContent = product.name;
+                    // Check if the quantity is under 50 and apply the CSS class
+                    const quantityCell = row.insertCell();
+                    quantityCell.textContent = product.quantity;
+                    if (product.quantity < 50) {
+                        quantityCell.classList.add('low-stock');
+                    }
+                    row.insertCell().textContent = product.unit_price;
+                    row.insertCell().textContent = product.receive_date;
+                    row.insertCell().textContent = product.sell_date;
+                    row.insertCell().textContent = product.supplier || '';
+                    row.insertCell().textContent = product.category;
+                });
+            })
+            .catch(error => console.error('Error fetching inventory:', error));
+    </script>
+</body>
+
+</html>
