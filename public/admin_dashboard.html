@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="icon" href="/logo.png" type="image/png">
     <title>Admin Dashboard</title>
 </head>
+
 <body>
     <header>
         <h1>Le Verger du Coin</h1>
@@ -20,16 +22,11 @@
         <button onclick="clients()">Clients fidèles</button>
         <button onclick="logout()">Se déconnecter</button>
     </div>
-    
-    <div id="toolbar">
-        <!-- ... (toolbar buttons) ... -->
-    </div>
 
-    <!-- Display total profit and spendings -->
-<section id="profitSection">
-    <h2> Profit Total</h2>
-    <p>Profit total: <span id="totalProfit"></span></p>
-</section>
+    <section id="profitSection">
+        <h2> Profit Total</h2>
+        <p>Profit total: <span id="totalProfit"></span></p>
+    </section>
 
     <section id="ordersSection">
         <h2>Commandes passées</h2>
@@ -44,7 +41,6 @@
                 </tr>
             </thead>
             <tbody id="salesTableBody">
-                <!-- Orders data will be dynamically added here -->
             </tbody>
         </table>
     </section>
@@ -56,75 +52,65 @@
 
     <script src="script.js"></script>
     <script>
-        // Fetch and display client's orders
-// Fetch and display client's orders
-function fetchAndDisplaySales() {
-    fetch('http://localhost:3000/sales')
-        .then(response => response.json())
-        .then(data => {
-            const salesTableBody = document.getElementById('salesTableBody');
-            const totalProfitSpan = document.getElementById('totalProfit');
-            
-            // Clear existing rows
-            salesTableBody.innerHTML = '';
+        function fetchAndDisplaySales() {
+            fetch('http://localhost:3000/sales')
+                .then(response => response.json())
+                .then(data => {
+                    const salesTableBody = document.getElementById('salesTableBody');
+                    const totalProfitSpan = document.getElementById('totalProfit');
 
-            // Initialize variables for profit and spending
-            let totalProfit = 0;
+                    salesTableBody.innerHTML = '';
 
-            // Add new rows for sales data only
-            if (data.sales) {
-                data.sales.forEach(sale => {
-                    const row = salesTableBody.insertRow();
-                    row.insertCell().textContent = sale.product;
-                    row.insertCell().textContent = sale.quantity;
-                    row.insertCell().textContent = sale.name;
-                    row.insertCell().textContent = sale.email;
-                    row.insertCell().textContent = sale.order_date;
+                    let totalProfit = 0;
 
-                    // Fetch unit price for each product
-                    getUnitPrice(sale.product)
-                        .then(unitPrice => {
-                            // Calculate profit for each order and update the total profit
-                            const orderProfit = unitPrice * sale.quantity;
-                            totalProfit += orderProfit;
+                    if (data.sales) {
+                        data.sales.forEach(sale => {
+                            const row = salesTableBody.insertRow();
+                            row.insertCell().textContent = sale.product;
+                            row.insertCell().textContent = sale.quantity;
+                            row.insertCell().textContent = sale.name;
+                            row.insertCell().textContent = sale.email;
+                            row.insertCell().textContent = sale.order_date;
 
-                            // Display the total profit dynamically
-                            totalProfitSpan.textContent = `${totalProfit.toFixed(2)}`;
-                        
-                        
-                        })
-                        .catch(error => console.error('Error fetching unit price:', error));
+                            getUnitPrice(sale.product)
+                                .then(unitPrice => {
+                                    const orderProfit = unitPrice * sale.quantity;
+                                    totalProfit += orderProfit;
+
+                                    totalProfitSpan.textContent = `${totalProfit.toFixed(2)}`;
+
+
+                                })
+                                .catch(error => console.error('Error fetching unit price:', error));
+                        });
+                    } else {
+                        const row = salesTableBody.insertRow();
+                        const cell = row.insertCell();
+                        cell.colSpan = 4;
+                        cell.textContent = 'No sales available.';
+                    }
+
+                    totalSpendingSpan.textContent = `${totalSpending.toFixed(2)}`;
+                })
+                .catch(error => console.error('Error fetching client orders:', error));
+        }
+
+        function getUnitPrice(product) {
+            return fetch(`http://localhost:3000/product-unit-price/${product}`)
+                .then(response => response.json())
+                .then(data => data.unitPrice)
+                .catch(error => {
+                    console.error(`Error fetching unit price for ${product}:`, error);
+                    return 0; 
                 });
-            } else {
-                const row = salesTableBody.insertRow();
-                const cell = row.insertCell();
-                cell.colSpan = 4;
-                cell.textContent = 'No sales available.';
-            }
+        }
 
-            // Display the total spending
-            totalSpendingSpan.textContent = `${totalSpending.toFixed(2)}`;
-        })
-        .catch(error => console.error('Error fetching client orders:', error));
-}
+        window.onload = function () {
+            fetchAndDisplaySales();
+        };
 
-// You need to implement this function to fetch the unit price for a given product from the server
-function getUnitPrice(product) {
-    return fetch(`http://localhost:3000/product-unit-price/${product}`)
-        .then(response => response.json())
-        .then(data => data.unitPrice)
-        .catch(error => {
-            console.error(`Error fetching unit price for ${product}:`, error);
-            return 0; // Default to 0 in case of an error
-        });
-}
+    </script>
 
-// Call this function when the page loads
-window.onload = function () {
-    fetchAndDisplaySales();
-};
-
-        </script>
-        
 </body>
+
 </html>
