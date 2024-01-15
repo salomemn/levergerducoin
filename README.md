@@ -9,9 +9,6 @@ Bienvenue sur le site web Le Verger du Coin ! Ce site permet aux utilisateurs de
   - [Prérequis](#prérequis)
   - [Installation](#installation)
 - [Utilisation](#utilisation)
-- [Contributions](#contributions)
-- [Licence](#licence)
-- [Remerciements](#remerciements)
 
 ## Fonctionnalités
 
@@ -43,7 +40,7 @@ Bienvenue sur le site web Le Verger du Coin ! Ce site permet aux utilisateurs de
 
    ```
    npm install
-  
+   ```
 
 6. Configurer la base de données MySQL en exécutant les scripts SQL dans le dossier database
 
