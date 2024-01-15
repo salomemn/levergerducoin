@@ -1,6 +1,6 @@
 # Site Web Le Verger du Coin
 
-Bienvenue sur le site web Le Verger du Coin ! Ce site permet aux utilisateurs de passer des commandes, de consulter l'inventaire et de gérer les clients fidèles pour une épicerie de fruits.
+Bienvenue sur le site web Le Verger du Coin ! Ce site permet aux utilisateurs de passer des commandes de fruits et légumes et de consulter leur historique de commandes. Il permet également au commerçcant de passer des commandes auprès des forunisseurs, de consulter l'inventaire et de gérer les clients fidèles.
 
 ## Table des matières
 
