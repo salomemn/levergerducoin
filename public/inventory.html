@@ -15,7 +15,6 @@
         <h1>Le Verger du Coin</h1>
     </header>
 
-    <!-- Toolbar at the top -->
     <div id="toolbar">
         <div id="toolbar">
             <button onclick="home()">Accueil</button>
@@ -41,7 +40,6 @@
                 </tr>
             </thead>
             <tbody id="inventoryTableBody">
-                <!-- Inventory data will be dynamically added here -->
             </tbody>
         </table>
     </section>
@@ -52,20 +50,16 @@
 
     <script src="script.js"></script>
     <script>
-        // Fetch inventory from the server and populate the table
         fetch('http://localhost:3000/products')
             .then(response => response.json())
             .then(data => {
                 const inventoryTableBody = document.getElementById('inventoryTableBody');
 
-                // Clear existing rows
                 inventoryTableBody.innerHTML = '';
 
-                // Add new rows
                 data.products.forEach(product => {
                     const row = inventoryTableBody.insertRow();
                     row.insertCell().textContent = product.name;
-                    // Check if the quantity is under 50 and apply the CSS class
                     const quantityCell = row.insertCell();
                     quantityCell.textContent = product.quantity;
                     if (product.quantity < 50) {
