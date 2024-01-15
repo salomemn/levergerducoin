@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Historique</title>
 </head>
+
 <body>
     <header>
         <h1>Le Verger du Coin</h1>
@@ -20,10 +22,6 @@
             <button onclick="logout()">Se déconnecter</button>
         </div>
     </div>
-    
-    <div id="toolbar">
-        <!-- ... (toolbar buttons) ... -->
-    </div>
 
     <section id="ordersSection">
         <h2>Mes Commandes</h2>
@@ -35,7 +33,6 @@
                 </tr>
             </thead>
             <tbody id="salesTableBody">
-                <!-- Orders data will be dynamically added here -->
             </tbody>
         </table>
     </section>
@@ -47,53 +44,48 @@
 
     <script src="script.js"></script>
     <script>
-    // Fetch and display client's orders
-    function fetchAndDisplaySalesAdmin() {
+        function fetchAndDisplaySalesAdmin() {
 
-  fetch(`http://localhost:3000/sales/`)
-      .then(response => response.json())
-      .then(data => {
-          const salesTableBody = document.getElementById('salesTableBody');
+            fetch(`http://localhost:3000/sales/`)
+                .then(response => response.json())
+                .then(data => {
+                    const salesTableBody = document.getElementById('salesTableBody');
 
-          // Clear existing rows
-          salesTableBody.innerHTML = '';
+                    salesTableBody.innerHTML = '';
 
-          // Add new rows for sales data only
-          if (data.sales) {
-              data.sales.forEach(sale => {
-                  const row = salesTableBody.insertRow();
-                  row.insertCell().textContent = sale.product;
-                  row.insertCell().textContent = sale.quantity;
-                  row.insertCell().textContent = sale.name;
-                  row.insertCell().textContent = sale.email;
-              });
-          } else {
-              const row = salesTableBody.insertRow();
-              const cell = row.insertCell();
-              cell.colSpan = 4;
-              cell.textContent = 'No sales available.';
-          }
-      })
-      .catch(error => console.error('Error fetching client orders:', error));
-}
+                    if (data.sales) {
+                        data.sales.forEach(sale => {
+                            const row = salesTableBody.insertRow();
+                            row.insertCell().textContent = sale.product;
+                            row.insertCell().textContent = sale.quantity;
+                            row.insertCell().textContent = sale.name;
+                            row.insertCell().textContent = sale.email;
+                        });
+                    } else {
+                        const row = salesTableBody.insertRow();
+                        const cell = row.insertCell();
+                        cell.colSpan = 4;
+                        cell.textContent = 'No sales available.';
+                    }
+                })
+                .catch(error => console.error('Error fetching client orders:', error));
+        }
 
-// Function to get URL parameters
-function getUrlParameter(name) {
-    name = name.replace(/[\[\]]/g, '\\$&');
-    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-    const results = regex.exec(window.location.href);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
+        function getUrlParameter(name) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+            const results = regex.exec(window.location.href);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
 
-
-    // Call this function when the page loads
-    window.onload = function () {
-        fetchAndDisplaySales();
-    };
+        window.onload = function () {
+            fetchAndDisplaySales();
+        };
 
 
     </script>
 </body>
+
 </html>
